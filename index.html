@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AImanual - Join the Waiting List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Roboto, sans-serif;
+            background-color: #F0F0F0; /* Light gray background */
+            color: #333366; /* Dark blue text */
+        }
+        .background {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .background h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .background p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            max-width: 400px;
+            margin: 10px auto;
+        }
+        .btn {
+            max-width: 400px;
+            margin: 10px auto;
+            background-color: purple;
+            border: none;
+        }
+        .btn:hover {
+            background-color: darkviolet;
+        }
+        .message {
+            max-width: 400px;
+            margin: 10px auto;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <h1>AImanual</h1>
+        <p>AI-Driven Automated Software Manual Creation</p>
+        <form id="waiting-list-form" class="text-center">
+            <input type="email" id="waiting-email" class="form-control" placeholder="Enter your email" required>
+            <button type="submit" class="btn btn-primary">Join the Waiting List</button>
+        </form>
+        <p id="waiting-list-message" class="message"></p>
+    </div>
+
+    <script>
+        document.getElementById('waiting-list-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('waiting-email').value;
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwm0rArDzrsp4g84JKAVaXRAaPYPd1Gl6Y6Xio8PrIaPKBOCD7ye0rA6cpWRBUdUCQ-qQ/exec';
+
+            fetch(scriptURL, { method: 'POST', body: new URLSearchParams({ email }) })
+                .then(response => response.text())
+                .then(result => {
+                    document.getElementById('waiting-list-message').innerText = 'Thank you for joining our waiting list!';
+                })
+                .catch(error => {
+                    document.getElementById('waiting-list-message').innerText = 'There was an error, please try again.';
+                    console.error('Error!', error.message);
+                });
+        });
+    </script>
+</body>
+</html>
